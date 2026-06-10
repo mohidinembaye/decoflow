@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DecoFlow — Interior Management</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            beige:         '#F5F0EA',
+            terracotta:    '#C97B5A',
+            'terra-light': '#E8A882',
+            'terra-pale':  '#F2DDD0',
+            charcoal:      '#2C2A27',
+            muted:         '#9B9589',
+          },
+          fontFamily: {
+            display: ['Cormorant Garamond', 'serif'],
+            body:    ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    ::selection { background: #E8A882; color: #2C2A27; }
+
+    .champ:focus {
+      outline: none;
+      border-color: #C97B5A;
+      box-shadow: 0 0 0 3px rgba(201,123,90,0.15);
+    }
+
+    @keyframes tremblement {
+      0%,100% { transform: translateX(0); }
+      20%,60%  { transform: translateX(-6px); }
+      40%,80%  { transform: translateX(6px); }
+    }
+    .tremblement { animation: tremblement 0.4s ease; }
+
+    .chargement {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: rotation 0.7s linear infinite;
+      vertical-align: middle;
+      margin-left: 8px;
+    }
+    @keyframes rotation { to { transform: rotate(360deg); } }
+
+    @keyframes glissement-droite {
+      from { opacity: 0; transform: translateX(40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes glissement-gauche {
+      from { opacity: 0; transform: translateX(-40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes apparition {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .animer-droite { animation: glissement-droite 0.3s ease; }
+    .animer-gauche { animation: glissement-gauche 0.3s ease; }
+    .animer-fond   { animation: apparition 0.4s ease forwards; }
+
+    .barre-graphique { transition: height 0.3s ease, background-color 0.2s; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #E8A882; border-radius: 99px; }
+  </style>
+</head>
+<body id="corps-application" class="font-body bg-beige min-h-screen">
+
+  <!-- Conteneur unique de l'application -->
+
+<div id="app" class="w-full max-w-4xl mx-auto flex justify-center items-center"></div>
+  <!-- Base de données locale + validation partagée -->
+  <script src="deco.js"></script>
+
+  <!-- Pages (chacune injecte son HTML dans #app et gère sa logique) -->
+  <script src="connexion.js"></script>
+  <script src="inscription.js"></script>
+  <script src="dashboard.js"></script>
+
+</body>
+</html>
