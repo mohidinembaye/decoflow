@@ -221,7 +221,7 @@ export function attacherNavigationNavbar(prenomUtilisateur) {
         return;
       }
       supprimerSession();
-      window.location.hash = '#connexion';
+      window.location.hash = '#accueuil';
     });
   }
 }

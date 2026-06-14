@@ -235,7 +235,7 @@ export function afficherPageAccueil() {
               <li class="flex items-start gap-3">
                 <div class="w-5 h-5 rounded-full bg-terra-pale flex items-center justify-center flex-shrink-0 mt-0.5">
                   <i class="fa-solid fa-check text-terracotta text-[9px]"></i>
-                </div>
+                </div> 
                 <p class="text-xs text-muted leading-relaxed">Suivi en temps réel de l'avancement de vos travaux</p>
               </li>
             </ul>
