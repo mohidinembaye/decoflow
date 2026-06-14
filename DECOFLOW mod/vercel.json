@@ -2,14 +2,14 @@
   "version": 3,
   "builds": [
     {
-      "src": "index.html",
+      "src": "DECOFLOW mod/index.html",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/DECOFLOW mod/index.html"
     }
   ]
 }
