@@ -1,45 +1,44 @@
 {
   "utilisateurs": [
     {
+      "id": "1",
+      "nom": "Aminata Diallo",
+      "email": "client@decoflow.com",
+      "motDePasse": "client123",
+      "entreprise": "Particulier",
+      "role": "client",
+      "dateInscription": "2024-01-10T09:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "nom": "Karim Mbaye",
+      "email": "admin@decoflow.com",
+      "motDePasse": "admin123",
+      "entreprise": "DecoFlow",
+      "role": "admin",
+      "dateInscription": "2024-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "nom": "Moussa Ndiaye",
+      "email": "super@decoflow.com",
+      "motDePasse": "super123",
+      "entreprise": "DecoFlow",
+      "role": "superadmin",
+      "dateInscription": "2023-12-01T08:00:00.000Z"
+    },
+    {
       "nom": "mohidine mbaye",
       "entreprise": "odc",
-      "email": "mohidinembaye@gmail.com",
-      "motDePasse": "Rahmatoulaye28",
-      "dateInscription": "2026-06-12T11:50:21.533Z",
-      "id": "kJUAW0IZxlo"
-    },
-    {
-      "nom": "fallou",
-      "entreprise": "fall",
-      "email": "mohidine@gmail.com",
-      "motDePasse": "Rahmatoulaye28",
-      "dateInscription": "2026-06-12T11:51:06.565Z",
-      "id": "l8CA3LlxSvU"
-    },
-    {
-      "nom": "aita gueye",
-      "entreprise": "fjf",
-      "email": "aita@gmail.com",
+      "email": "mo@gmail.com",
       "motDePasse": "azerty21",
-      "dateInscription": "2026-06-12T11:54:26.952Z",
-      "id": "2iioDNqr_IU"
-    },
-    {
-      "nom": "ata",
-      "entreprise": "ata",
-      "email": "ata@gmail.com",
-      "motDePasse": "12345678",
-      "dateInscription": "2026-06-12T12:09:21.405Z",
-      "id": "4ZIlwKZfj_Y"
-    },
-    {
-      "nom": "mohidine mbaye",
-      "entreprise": "qsd",
-      "email": "baye@gmail.com",
-      "motDePasse": "Rahmatoulaye28",
-      "dateInscription": "2026-06-13T13:59:41.155Z",
-      "id": "UB1WDc33wGM"
+      "role": "client",
+      "dateInscription": "2026-06-14T13:05:52.557Z",
+      "id": "_c99-CRDg-Q"
     }
   ],
+  "produits": [],
+  "commandes": [],
+  "devis": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

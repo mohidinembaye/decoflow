@@ -1,12 +1,20 @@
 import { afficherPageConnexion }   from './connexion.js';
 import { afficherPageInscription } from './inscription.js';
 
+
+
 export function afficherPageAccueil() {
-  history.pushState({ page: 'accueil' }, '', '#accueil');
+  // Ne plus utiliser pushState pour #accueil : sinon le routeur (main.js) peut traiter
+  // les changements d’URL/hash comme une navigation et rediriger vers dashboard.
+  if (window.location.hash !== '#accueil') {
+    window.location.hash = '#accueil';
+  }
   var conteneurApp = document.getElementById('app');
+  conteneurApp.className = 'w-full min-h-screen';
 
   document.getElementById('corps-application').className =
-    'font-body bg-white min-h-screen flex items-center justify-center p-0 transition-all duration-300';
+    'font-body bg-white min-h-screen w-full p-0 transition-all duration-300';
+  document.body.classList.remove('flex','items-center','justify-center');
 
   conteneurApp.innerHTML = `
     <div id="page-accueil" class="animer-fond w-full min-h-screen flex flex-col">
@@ -18,11 +26,11 @@ export function afficherPageAccueil() {
           <span class="font-display text-xl font-semibold text-charcoal tracking-wide">DecoFlow</span>
         </div>
         <nav class="hidden md:flex items-center gap-8">
-          <a href="#curation"   class="text-xs text-muted uppercase tracking-widest hover:text-charcoal transition">Collection</a>
-          <a href="#chiffres"   class="text-xs text-muted uppercase tracking-widest hover:text-charcoal transition">À propos</a>
-          <a href="#excellence" class="text-xs text-muted uppercase tracking-widest hover:text-charcoal transition">Services</a>
-          <a href="#temoignages" class="text-xs text-muted uppercase tracking-widest hover:text-charcoal transition">Témoignages</a>
-          <a href="#newsletter" class="text-xs text-muted uppercase tracking-widest hover:text-charcoal transition">Contact</a>
+          <a href="#curation"   class="text-xs text-muted uppercase tracking-widest hover:text-charcoal transition decoflow-scroll">Collection</a>
+          <a href="#chiffres"   class="text-xs text-muted uppercase tracking-widest hover:text-charcoal transition decoflow-scroll">À propos</a>
+          <a href="#curation" class="text-xs text-muted uppercase tracking-widest hover:text-charcoal transition decoflow-scroll">Services</a>
+          <a href="#temoignages" class="text-xs text-muted uppercase tracking-widest hover:text-charcoal transition decoflow-scroll">Témoignages</a>
+          <a href="#newsletter" class="text-xs text-muted uppercase tracking-widest hover:text-charcoal transition decoflow-scroll">Contact</a>
         </nav>
         <button id="bouton-connexion-accueil" type="button"
           class="bg-charcoal text-white text-xs font-medium uppercase tracking-widest px-5 py-2.5 hover:bg-terracotta transition-colors duration-200">
@@ -47,7 +55,7 @@ export function afficherPageAccueil() {
                 class="bg-charcoal text-white text-xs font-medium uppercase tracking-widest px-7 py-3 hover:bg-terracotta transition-colors duration-200">
                 Découvrir la collection
               </button>
-              <a href="#excellence" class="text-xs text-charcoal uppercase tracking-widest border-b border-charcoal pb-0.5 hover:text-terracotta hover:border-terracotta transition">
+              <a href="#curation" class="text-xs text-charcoal uppercase tracking-widest border-b border-charcoal pb-0.5 hover:text-terracotta hover:border-terracotta transition">
                 Nos services
               </a>
             </div>
@@ -365,28 +373,62 @@ export function afficherPageAccueil() {
     </div>
   `;
 
+  // navbar accueil: conserve la structure/largeur, sans changer le contenu public
+  // (navigation.js gère uniquement le mode connecté côté app; sur l'accueil on ne l'affiche pas.)
+
   attacherEcouteursAccueil();
 }
 
+
 function attacherEcouteursAccueil() {
+  document.querySelectorAll('.decoflow-scroll').forEach(function(el) {
+    el.addEventListener('click', function(event) {
+      event.preventDefault();
+      var cible = this.getAttribute('href');
+      if (!cible || cible[0] !== '#') return;
+      var elementCible = document.getElementById(cible.slice(1));
+      if (elementCible) {
+        elementCible.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
   var boutonConnexion = document.getElementById('bouton-connexion-accueil');
   if (boutonConnexion) {
-    boutonConnexion.addEventListener('click', function() { afficherPageConnexion(); });
+    boutonConnexion.addEventListener('click', function() {
+      naviguerAccueil('connexion', function() { afficherPageConnexion(); });
+    });
   }
 
   var boutonDecouvrir = document.getElementById('bouton-decouvrir');
   if (boutonDecouvrir) {
-    boutonDecouvrir.addEventListener('click', function() { afficherPageConnexion(); });
+    boutonDecouvrir.addEventListener('click', function() {
+      naviguerAccueil('connexion', function() { afficherPageConnexion(); });
+    });
   }
 
   var boutonNewsletter = document.getElementById('bouton-newsletter');
   if (boutonNewsletter) {
-    boutonNewsletter.addEventListener('click', function() { afficherPageInscription(); });
+    boutonNewsletter.addEventListener('click', function() {
+      naviguerAccueil('inscription', function() { afficherPageInscription(); });
+    });
   }
 
   var boutonAcceder = document.getElementById('bouton-acceder');
   if (boutonAcceder) {
-    boutonAcceder.addEventListener('click', function() { afficherPageConnexion(); });
+    boutonAcceder.addEventListener('click', function() {
+      naviguerAccueil('connexion', function() { afficherPageConnexion(); });
+    });
+  }
+}
+
+function naviguerAccueil(page, fallback) {
+  if (window.decoflowRouter && typeof window.decoflowRouter.naviguerVers === 'function') {
+    window.decoflowRouter.naviguerVers(page);
+    return;
+  }
+  if (typeof fallback === 'function') {
+    fallback();
   }
 }
 

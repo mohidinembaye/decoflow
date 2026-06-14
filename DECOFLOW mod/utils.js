@@ -13,35 +13,27 @@ export function estMotDePasseValide(motDePasse) {
 // ─── UI helpers ───────────────────────────────────────────────────────────────
 
 export function afficherErreurChamp(idErreur, afficher) {
-  var elementErreur = document.getElementById(idErreur);
-  if (!elementErreur) return;
-  if (afficher) {
-    elementErreur.classList.remove('hidden');
-  } else {
-    elementErreur.classList.add('hidden');
-  }
+  var el = document.getElementById(idErreur);
+  if (!el) return;
+  el.classList.toggle('hidden', !afficher);
 }
 
 export function afficherAlerte(idMessage, afficher) {
-  var elementMessage = document.getElementById(idMessage);
-  if (!elementMessage) return;
-  if (afficher) {
-    elementMessage.classList.remove('hidden');
-  } else {
-    elementMessage.classList.add('hidden');
-  }
+  var el = document.getElementById(idMessage);
+  if (!el) return;
+  el.classList.toggle('hidden', !afficher);
 }
 
 export function changerTexteErreur(idTexte, texte) {
-  var elementTexte = document.getElementById(idTexte);
-  if (elementTexte) elementTexte.textContent = texte;
+  var el = document.getElementById(idTexte);
+  if (el) el.textContent = texte;
 }
 
-export function animerTremblement(formulaire) {
-  formulaire.classList.add('tremblement');
-  formulaire.addEventListener('animationend', function enleverAnimation() {
-    formulaire.classList.remove('tremblement');
-    formulaire.removeEventListener('animationend', enleverAnimation);
+export function animerTremblement(element) {
+  element.classList.add('tremblement');
+  element.addEventListener('animationend', function enlever() {
+    element.classList.remove('tremblement');
+    element.removeEventListener('animationend', enlever);
   });
 }
 
@@ -49,7 +41,6 @@ export function toggleChargement(idBouton, idTexte, idSpinner, enChargement) {
   var bouton  = document.getElementById(idBouton);
   var texte   = document.getElementById(idTexte);
   var spinner = document.getElementById(idSpinner);
-
   if (bouton)  bouton.disabled = enChargement;
   if (enChargement) {
     if (texte)   texte.textContent = 'Chargement…';
@@ -58,21 +49,16 @@ export function toggleChargement(idBouton, idTexte, idSpinner, enChargement) {
     if (spinner) spinner.classList.add('hidden');
   }
 }
- tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            beige:         '#F5F0EA',
-            terracotta:    '#C97B5A',
-            'terra-light': '#E8A882',
-            'terra-pale':  '#F2DDD0',
-            charcoal:      '#2C2A27',
-            muted:         '#9B9589',
-          },
-          fontFamily: {
-            display: ['Cormorant Garamond', 'serif'],
-            body:    ['Inter', 'sans-serif'],
-          },
-        }
-      }
-    }
+
+export function creerBadgeRole(role) {
+  var configs = {
+    superadmin: { texte: 'Superadmin', classe: 'bg-charcoal text-white' },
+    admin:      { texte: 'Admin',      classe: 'bg-terracotta text-white' },
+    client:     { texte: 'Client',     classe: 'bg-terra-pale text-terracotta' }
+  };
+  var config = configs[role] || configs.client;
+  var badge = document.createElement('span');
+  badge.className = 'inline-block text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-sm ' + config.classe;
+  badge.textContent = config.texte;
+  return badge;
+}
