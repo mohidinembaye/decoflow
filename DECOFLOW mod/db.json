@@ -1,0 +1,45 @@
+{
+  "utilisateurs": [
+    {
+      "nom": "mohidine mbaye",
+      "entreprise": "odc",
+      "email": "mohidinembaye@gmail.com",
+      "motDePasse": "Rahmatoulaye28",
+      "dateInscription": "2026-06-12T11:50:21.533Z",
+      "id": "kJUAW0IZxlo"
+    },
+    {
+      "nom": "fallou",
+      "entreprise": "fall",
+      "email": "mohidine@gmail.com",
+      "motDePasse": "Rahmatoulaye28",
+      "dateInscription": "2026-06-12T11:51:06.565Z",
+      "id": "l8CA3LlxSvU"
+    },
+    {
+      "nom": "aita gueye",
+      "entreprise": "fjf",
+      "email": "aita@gmail.com",
+      "motDePasse": "azerty21",
+      "dateInscription": "2026-06-12T11:54:26.952Z",
+      "id": "2iioDNqr_IU"
+    },
+    {
+      "nom": "ata",
+      "entreprise": "ata",
+      "email": "ata@gmail.com",
+      "motDePasse": "12345678",
+      "dateInscription": "2026-06-12T12:09:21.405Z",
+      "id": "4ZIlwKZfj_Y"
+    },
+    {
+      "nom": "mohidine mbaye",
+      "entreprise": "qsd",
+      "email": "baye@gmail.com",
+      "motDePasse": "Rahmatoulaye28",
+      "dateInscription": "2026-06-13T13:59:41.155Z",
+      "id": "UB1WDc33wGM"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
